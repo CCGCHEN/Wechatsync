@@ -3,18 +3,18 @@ export default class BaiJiaHaoAdapter {
   constructor() {
     this.version = '0.0.1'
     modifyRequestHeaders('baijiahao.baidu.com/', {
-    	Origin: 'https://baijiahao.baidu.com',
+      Origin: 'https://baijiahao.baidu.com',
       Referer: 'https://baijiahao.baidu.com/'
     }, [
-    	'*://baijiahao.baidu.com/*',
+      '*://baijiahao.baidu.com/*',
     ])
   }
 
   async getMetaData() {
     const { data } = await axios.get('https://baijiahao.baidu.com/builder/app/appinfo?_=' + Date.now())
-    console.log(data)
-    if(data.errmsg != 'success') {
-    	throw new Error('not found')
+    console.log('baijiahao getMetaData', data)
+    if (data.errmsg != 'success') {
+      throw new Error('not found')
     }
     const accountInfo = data.data.user
     return {
@@ -41,8 +41,8 @@ export default class BaiJiaHaoAdapter {
     const pageHtml = await $.get('https://baijiahao.baidu.com/builder/rc/edit')
     const markStr = 'window.__BJH__INIT__AUTH__="'
     const authIndex = pageHtml.indexOf(markStr)
-    if(authIndex == -1) {
-    	throw new Error('登录失效')
+    if (authIndex == -1) {
+      throw new Error('登录失效')
     }
 
     const authToken = pageHtml.substring(authIndex + markStr.length, pageHtml.indexOf('",window.__BJH__EDIT_', authIndex))
@@ -57,10 +57,11 @@ export default class BaiJiaHaoAdapter {
       len: post.post_content.length,
       activity_list: [
         {
-        	id: 408,
+          id: 408,
           is_checked: 0
         }
       ],
+
       source_reprinted_allow: 0,
       original_status: 0,
       original_handler_status: 1,
@@ -71,7 +72,7 @@ export default class BaiJiaHaoAdapter {
       type: 'news',
     }
     const res = await $.ajax({
-    	url: 'https://baijiahao.baidu.com/pcui/article/save?callback=bjhdraft',
+      url: 'https://baijiahao.baidu.com/pcui/article/save?callback=bjhdraft',
       type: 'POST',
       dataType: 'JSON',
       headers: {
@@ -82,8 +83,8 @@ export default class BaiJiaHaoAdapter {
 
     console.log("request baijiahao article save interface res: ", JSON.stringify(res))
 
-    if(res.errmsg != 'success') {
-    	throw new Error(res.errmsg)
+    if (res.errmsg != 'success') {
+      throw new Error(res.errmsg)
     }
     post_id = res.ret.article_id
     return {

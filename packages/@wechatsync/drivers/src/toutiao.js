@@ -42,6 +42,14 @@ export default class ToutiaoAdapter {
         thumb_height: post.post_thumbnail_raw.images[0].height,
       })
     }
+    var toutiao_publish_config = JSON.parse(localStorage.getItem('toutiao_publish_config'));
+    var save_config = toutiao_publish_config === 1 ? 1 : 0;
+    if (post.post_title.length >= 30) {
+      save_config = 0;
+    }
+    console.log('save_config', save_config)
+    var curTime = new Date();
+    var addMinute = new Date(curTime.setMinutes(curTime.getMinutes() + 10));
 
     await $.get('https://mp.toutiao.com/profile_v3/graphic/publish')
     var res = await $.ajax({
@@ -51,12 +59,14 @@ export default class ToutiaoAdapter {
       dataType: 'JSON',
       data: {
         title: post.post_title,
-        article_ad_type: 2,
+        article_ad_type: 3,
         article_type: 0,
+        claim_origin: 1,
         from_diagnosis: 0,
+        timer_time: addMinute,
         origin_debut_check_pgc_normal: 0,
         tree_plan_article: 0,
-        save: 0,
+        save: save_config,//传入1表明直接发布
         pgc_id: 0,
         content: post.post_content,
         pgc_feed_covers: JSON.stringify(pgc_feed_covers),

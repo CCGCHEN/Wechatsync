@@ -4,7 +4,7 @@ function getCache(name, cb) {
       action: 'getCache',
       name: name,
     },
-    function(resp) {
+    function (resp) {
       cb && cb(resp.result[name])
     }
   )
@@ -16,7 +16,7 @@ function getMultiCache(names, cb) {
       action: 'getCache',
       names: names,
     },
-    function(resp) {
+    function (resp) {
       cb && cb(resp.result)
     }
   )
@@ -29,7 +29,7 @@ function setCache(name, value, cb) {
       name: name,
       value: value,
     },
-    function(resp) {
+    function (resp) {
       cb && cb(resp)
     }
   )
@@ -45,7 +45,7 @@ function sendEvent(category, action, label) {
         label: label
       },
     },
-    function(resp) {
+    function (resp) {
       cb && cb(resp)
     }
   )
@@ -54,7 +54,7 @@ function sendEvent(category, action, label) {
 var unsafeWindow
 var sharedTaskStatus = null
 
-setTimeout(function() {
+setTimeout(function () {
   var script = document.createElement('script')
   script.type = 'text/javascript'
   script.innerHTML =
@@ -162,7 +162,7 @@ if (isSinglePage) {
     // console.log($('#exampleModalCenter').modal())
     $('#syncd-users').click(checkShareStatus)
   }
-  div.click(function() {
+  div.click(function () {
     getAccounts(() => {
       afterGet()
     })
@@ -194,40 +194,6 @@ var html = `
 `
 
 $('body').append(html)
-
-$('body').append(`
-<div data-toggle="modal" data-target="#exampleModalCenterForShare" id="sharetrigger"></div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenterForShare" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterForShareTitle" aria-hidden="true">
-  <div class="modal-dialog modal-sm modal-dialog-centered modal-dialog-scrollable" role="document" style="color: #444;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">求分享</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closesyncmodl">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
- <div><h3 style="color: #aaa;font-size: 16px;">请帮忙分享给有需要的人！</h3>
- <p id="doubanshare" style="/* margin-top: 17px */">
- </p>
- <p id="weiboshare" style="margin-bottom: 25px;">
-</p>
-<h3 style="color: #666;font-size: 16px;">或复制分享</h3><textarea style="
-    width: 100%;
-    height: 200px;
-    background: #eee;
-    color: #777;
-    padding: 10px;
-    border: 1px solid #ddd;
-    "
-    id="sshare-text"
-    ></textarea></div>
-    </div>
-    </div>
-  </div>
-</div>
-`)
 
 var hasbeenShared = false
 var syncCount = 0
@@ -274,13 +240,13 @@ function initShareConfig() {
   var sharText = `文章同步助手 - 一键同步文章到头条、百家号等多达20个渠道，提高内容发布效率，解放生产力！`
 
   shareText.innerHTML = sharText + ' ' + shareUrl
-  shareText.onselect = function() {
+  shareText.onselect = function () {
     afterShareInteraction('share-selected')
   }
 
-  doubanshare.addEventListener('click', function() {
+  doubanshare.addEventListener('click', function () {
     afterShareInteraction('douban-clicked')
-    ~(function() {
+    ~(function () {
       var d = document,
         e = encodeURIComponent,
         s1 = window.getSelection,
@@ -297,18 +263,18 @@ function initShareConfig() {
           '&v=1',
         w = 450,
         h = 330,
-        x = function() {
+        x = function () {
           var openWin = window.open(
             r,
             'douban',
             'toolbar=0,resizable=1,scrollbars=yes,status=1,width=' +
-              w +
-              ',height=' +
-              h +
-              ',left=' +
-              (screen.width - w) / 2 +
-              ',top=' +
-              (screen.height - h) / 2
+            w +
+            ',height=' +
+            h +
+            ',left=' +
+            (screen.width - w) / 2 +
+            ',top=' +
+            (screen.height - h) / 2
           )
           if (!openWin) location.href = r + '&r=1'
         }
@@ -320,28 +286,28 @@ function initShareConfig() {
     })()
   })
 
-  weiboshare.addEventListener('click', function() {
+  weiboshare.addEventListener('click', function () {
     afterShareInteraction('weibo-clicked')
-    ;(function() {
-      var d = document,
-        e = encodeURIComponent,
-        s1 = window.getSelection,
-        s2 = d.getSelection,
-        s3 = d.selection,
-        s = s1 ? s1() : s2 ? s2() : s3 ? s3.createRange().text : '',
-        r =
-          'https://service.weibo.com/share/share.php?url=' +
-          e(shareUrl) +
-          '&language=zh_cn&title=' +
-          e(sharText) +
-          '%20%40_fun0&source=&sourceUrl=&ralateUid=&message=&uids=&pic=&searchPic=false&content=',
-        w = 450,
-        h = 330,
-        x = function() {
-          var openWin = window.open(
-            r,
-            'weibo',
-            'toolbar=0,resizable=1,scrollbars=yes,status=1,width=' +
+      ; (function () {
+        var d = document,
+          e = encodeURIComponent,
+          s1 = window.getSelection,
+          s2 = d.getSelection,
+          s3 = d.selection,
+          s = s1 ? s1() : s2 ? s2() : s3 ? s3.createRange().text : '',
+          r =
+            'https://service.weibo.com/share/share.php?url=' +
+            e(shareUrl) +
+            '&language=zh_cn&title=' +
+            e(sharText) +
+            '%20%40_fun0&source=&sourceUrl=&ralateUid=&message=&uids=&pic=&searchPic=false&content=',
+          w = 450,
+          h = 330,
+          x = function () {
+            var openWin = window.open(
+              r,
+              'weibo',
+              'toolbar=0,resizable=1,scrollbars=yes,status=1,width=' +
               w +
               ',height=' +
               h +
@@ -349,15 +315,15 @@ function initShareConfig() {
               (screen.width - w) / 2 +
               ',top=' +
               (screen.height - h) / 2
-          )
-          if (!openWin) location.href = r + '&r=1'
+            )
+            if (!openWin) location.href = r + '&r=1'
+          }
+        if (/Firefox/.test(navigator.userAgent)) {
+          setTimeout(x, 0)
+        } else {
+          x()
         }
-      if (/Firefox/.test(navigator.userAgent)) {
-        setTimeout(x, 0)
-      } else {
-        x()
-      }
-    })()
+      })()
   })
 
   doubanshare.innerHTML = `<a ><img src="https://img3.doubanio.com/pics/fw2douban1.png" alt="推荐到豆瓣" /></a>`
@@ -366,7 +332,7 @@ function initShareConfig() {
 
 setTimeout(initShareConfig, 200)
 
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponseA) {
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponseA) {
   console.log('content.js revice', request)
   try {
     console.log('revice', request)
@@ -391,7 +357,7 @@ function checkShareStatus() {
   }
 }
 
-getMultiCache([isShareKey, syncCountKey, shareShowedKey], function(result) {
+getMultiCache([isShareKey, syncCountKey, shareShowedKey], function (result) {
   console.log('result', result)
   if (result[isShareKey]) {
     hasbeenShared = true
@@ -417,7 +383,7 @@ function buildStatusHtml(taskStatus) {
     var msg =
       (account.status == 'uploading'
         ? ` <div class="lds-dual-ring"></div>` +
-          (account.msg ? account.msg : `同步中`)
+        (account.msg ? account.msg : `同步中`)
         : ``) +
       (account.status == 'failed'
         ? `同步失败, 错误内容：` + account.error
@@ -425,8 +391,8 @@ function buildStatusHtml(taskStatus) {
       (account.status == 'done' && account.editResp
         ? `同步成功 <a
                       href="` +
-          account.editResp.draftLink +
-          `"
+        account.editResp.draftLink +
+        `"
                       style="margin-left: 5px"
                       target="_blank"
                       >查看草稿</a
@@ -444,8 +410,8 @@ function buildStatusHtml(taskStatus) {
                  ` +
       (account.icon
         ? ` <img src="` +
-          account.icon +
-          `" class="icon"
+        account.icon +
+        `" class="icon"
       width="20"
       height="20"
       style="vertical-align: -6px;height: 20px !important"
@@ -495,7 +461,7 @@ function buildStatusHtml(taskStatus) {
   }
 }
 
-$('#exampleModalCenter .btn-primary').click(function(e) {
+$('#exampleModalCenter .btn-primary').click(function (e) {
   // var listAccount = $('input[name="submit_check"]')
   // var saccounts = []
   // for (let index = 0; index < listAccount.length; index++) {
@@ -523,7 +489,7 @@ $('#exampleModalCenter .btn-primary').click(function(e) {
         accounts: saccounts,
       },
     },
-    function(resp) {
+    function (resp) {
       console.log('addTask return', resp)
     }
   )
@@ -541,7 +507,7 @@ function getAccounts(cb) {
     {
       action: 'getAccount',
     },
-    function(resp) {
+    function (resp) {
       allAccounts = resp
       cb && cb()
     }
@@ -551,7 +517,7 @@ function getAccounts(cb) {
 function saveCheckdStatus(accounts) {
   try {
     localStorage.setItem('_sync_checked_all', JSON.stringify(accounts))
-  } catch (e) {}
+  } catch (e) { }
 }
 
 function restoreCheckedState() {
@@ -630,7 +596,7 @@ if (isEditorPage) {
           msgId: extractUrlValue('appmsgid'),
         },
       },
-      function(resp) {
+      function (resp) {
         editorStatusBar.show()
         $('#syncd-users').html('等待发布...')
         chrome.extension.sendMessage(
@@ -641,7 +607,7 @@ if (isEditorPage) {
               accounts: allChecked,
             },
           },
-          function(resp) {
+          function (resp) {
             console.log('addTask return', resp)
           }
         )
@@ -723,25 +689,25 @@ if (isEditorPage) {
         $('.mass-send__footer .weui-desktop-btn_primary').click(() => {
           console.log('clicked')
           getAllCheckedAccounts()
-          ;(function waitUntil() {
-            const confirmDialogs = $('.weui-desktop-dialog__wrp').filter(
-              function() {
-                return (
-                  $(this)
-                    .text()
-                    .indexOf('开始群发后无法撤销') > -1
-                )
+            ; (function waitUntil() {
+              const confirmDialogs = $('.weui-desktop-dialog__wrp').filter(
+                function () {
+                  return (
+                    $(this)
+                      .text()
+                      .indexOf('开始群发后无法撤销') > -1
+                  )
+                }
+              )
+              if (confirmDialogs.length) {
+                confirmDialogs.find('.weui-desktop-btn_primary').click(() => {
+                  console.log('btn clicked')
+                  prepairSubmitTask()
+                })
+                return
               }
-            )
-            if (confirmDialogs.length) {
-              confirmDialogs.find('.weui-desktop-btn_primary').click(() => {
-                console.log('btn clicked')
-                prepairSubmitTask()
-              })
-              return
-            }
-            setTimeout(waitUntil, 300)
-          })()
+              setTimeout(waitUntil, 300)
+            })()
         })
       }, 100)
     })

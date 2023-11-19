@@ -1,6 +1,21 @@
 # API 文档
 文章同步助手是运行在浏览器内的扩展程序
 
+# 百家号文章相关API
+https://baijiahao.baidu.com/docs/#/normalcomplex/developer/modifyPT
+
+https://www.dnsworker.com/archives/53.html
+
+# 头条文章相关API
+https://wbinks.com/archives/%E4%BB%8A%E6%97%A5%E5%A4%B4%E6%9D%A1%E8%87%AA%E5%8A%A8%E5%8F%91%E5%9B%BE%E6%96%87%E5%A4%B4%E6%9D%A1
+
+https://github.com/zhangfei28/TTBot#%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3
+
+https://github.com/iMeiji/Toutiao/wiki/%E4%BB%8A%E6%97%A5%E5%A4%B4%E6%9D%A1Api%E5%88%86%E6%9E%90
+
+https://github.com/nishuer/mp-spider
+
+
 ## 网页发起同步任务
 如果你是文章编辑器开发者，或自己有内容库需要同步多个渠道，引入这个JS SDK:  
 https://github.com/wechatsync/article-syncjs
